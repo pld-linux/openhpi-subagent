@@ -2,16 +2,19 @@
 Summary:	SNMP agent for modeling SAForum Hardware Platform Interface
 Summary(pl):	Agent SNMP do modelowania interfejsu HPI SAForum
 Name:		openhpi-subagent
-Version:	0.7
+Version:	1.0.0
 Release:	0.1
 License:	BSD
 Group:		Applications
 Source0:	http://dl.sourceforge.net/openhpi/%{name}-%{version}.tar.gz
-# Source0-md5:	66c2d0bd103b7ed8df2112c87fc1a937
+# Source0-md5:	de299177ac6b1ea6664e6639aed91c06
 URL:		http://openhpi.sourceforge.net/
+BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
 BuildRequires:	docbook-dtd41-sgml
 BuildRequires:	docbook-utils
+BuildRequires:	glib2-devel >= 2.0
+BuildRequires:	libtool
 BuildRequires:	net-snmp-devel >= 5.1.1
 BuildRequires:	openhpi-devel >= 0.5.0
 BuildRequires:	pkgconfig
@@ -38,8 +41,14 @@ systemy oparte na Sysfs.
 %prep
 %setup -q
 
+%{__perl} -pi -e 's/glib`/glib-2.0`/' configure.ac
+
 %build
-cp -f /usr/share/automake/config.* .
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 
 %{__make}
