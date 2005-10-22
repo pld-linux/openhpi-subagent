@@ -1,13 +1,14 @@
-# TODO: PLDify init script
 Summary:	SNMP agent for modeling SAForum Hardware Platform Interface
 Summary(pl):	Agent SNMP do modelowania interfejsu HPI SAForum
 Name:		openhpi-subagent
-Version:	2.0.0
-Release:	0.1
+Version:	2.2.0
+Release:	1
 License:	BSD
 Group:		Applications
 Source0:	http://dl.sourceforge.net/openhpi/%{name}-%{version}.tar.gz
-# Source0-md5:	808627687477614f9206180b8254201b
+# Source0-md5:	c3620ae45169e398c09052dabecd9922
+Source1:	%{name}.init
+Source2:	%{name}.sysconfig
 URL:		http://openhpi.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
@@ -16,10 +17,11 @@ BuildRequires:	docbook-utils
 BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	libtool
 BuildRequires:	net-snmp-devel >= 5.1.1
-BuildRequires:	openhpi-devel >= 2.1.1-2
+BuildRequires:	openhpi-devel >= 2.2.0
+BuildRequires:	sed >= 4.0
 BuildRequires:	pkgconfig
 Requires:	net-snmp >= 5.1.1
-Requires:	openhpi >= 2.1.1
+Requires:	openhpi >= 2.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,6 +43,9 @@ systemy oparte na Sysfs.
 %prep
 %setup -q
 
+# avoid error on some variable used only in debug builds
+sed -i -e 's/-Werror/-Werror -Wno-unused/' configure.ac
+
 %build
 %{__libtoolize}
 %{__aclocal}
@@ -59,7 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -D openhpi-subagent.rc $RPM_BUILD_ROOT/etc/rc.d/init.d/openhpi-subagent
+rm -f $RPM_BUILD_ROOT/etc/init.d/openhpi-subagent
+install -D %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/openhpi-subagent
+install -D %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/openhpi-subagent
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -67,6 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING ChangeLog README TODO mib/*.mib docs/*pdf docs/subagent-manual
-%config(noreplace) %verify(not size mtime md5) /etc/snmp/hpiSubagent.conf
-%attr(754,root,root) /etc/rc.d/init.d/openhpi-subagent
 %attr(755,root,root) %{_bindir}/hpi*
+%config(noreplace) %verify(not md5 mtime size) /etc/snmp/hpiSubagent.conf
+%attr(754,root,root) /etc/rc.d/init.d/openhpi-subagent
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/openhpi-subagent
