@@ -1,0 +1,7 @@
+# Customized settings for openhpi-subagent
+
+# Define nice level for openhpi-subagent
+SERVICE_RUN_NICE_LEVEL="+0"
+
+# Daemon options
+#OPTIONS="-f"
