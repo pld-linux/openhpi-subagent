@@ -1,12 +1,12 @@
 Summary:	SNMP agent for modeling SAForum Hardware Platform Interface
 Summary(pl):	Agent SNMP do modelowania interfejsu HPI SAForum
 Name:		openhpi-subagent
-Version:	2.3.1
+Version:	2.3.2
 Release:	1
 License:	BSD
 Group:		Applications
 Source0:	http://dl.sourceforge.net/openhpi/%{name}-%{version}.tar.gz
-# Source0-md5:	ce06b8b7f84081f7f7bdc3d8794935de
+# Source0-md5:	1ebb1d47cd2e6a674e6f83e99da67692
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 URL:		http://openhpi.sourceforge.net/
@@ -41,7 +41,7 @@ IPMI, IBM Blade Center (poprzez SNMP), linuksowe urz±dzenia Watchdog,
 systemy oparte na Sysfs.
 
 %prep
-%setup -q
+%setup -q -n %{name}-2.3.1
 
 # avoid error on some variable used only in debug builds
 sed -i -e 's/-Werror/-Werror -Wno-unused/' configure.ac
