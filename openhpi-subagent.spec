@@ -1,12 +1,12 @@
 Summary:	SNMP agent for modeling SAForum Hardware Platform Interface
 Summary(pl):	Agent SNMP do modelowania interfejsu HPI SAForum
 Name:		openhpi-subagent
-Version:	2.3.2
+Version:	2.3.4
 Release:	1
 License:	BSD
 Group:		Applications
 Source0:	http://dl.sourceforge.net/openhpi/%{name}-%{version}.tar.gz
-# Source0-md5:	1ebb1d47cd2e6a674e6f83e99da67692
+# Source0-md5:	17e84d43ef1d24ae8caa52615efb9512
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 URL:		http://openhpi.sourceforge.net/
@@ -23,6 +23,9 @@ BuildRequires:	pkgconfig
 Requires:	net-snmp >= 5.1.1
 Requires:	openhpi >= 2.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# because of netsnmp agent libs
+%define		filterout_ld	-Wl,--as-needed
 
 %description
 This package contains an SNMP subagent for the Service Availability
@@ -41,7 +44,7 @@ IPMI, IBM Blade Center (poprzez SNMP), linuksowe urz±dzenia Watchdog,
 systemy oparte na Sysfs.
 
 %prep
-%setup -q -n %{name}-2.3.1
+%setup -q
 
 # avoid error on some variable used only in debug builds
 sed -i -e 's/-Werror/-Werror -Wno-unused/' configure.ac
@@ -78,3 +81,4 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) /etc/snmp/hpiSubagent.conf
 %attr(754,root,root) /etc/rc.d/init.d/openhpi-subagent
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/openhpi-subagent
+%{_datadir}/snmp/mibs/*.mib
