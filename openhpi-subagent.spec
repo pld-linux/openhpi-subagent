@@ -1,5 +1,5 @@
 Summary:	SNMP agent for modeling SAForum Hardware Platform Interface
-Summary(pl):	Agent SNMP do modelowania interfejsu HPI SAForum
+Summary(pl.UTF-8):   Agent SNMP do modelowania interfejsu HPI SAForum
 Name:		openhpi-subagent
 Version:	2.3.4
 Release:	1
@@ -35,12 +35,12 @@ one can includes support for multiple different types of hardware
 including: IPMI, IBM Blade Center (via SNMP), Linux Watchdog devices,
 and Sysfs based systems.
 
-%description -l pl
+%description -l pl.UTF-8
 Ten pakiet zawiera podagenta SNMP dla specyfikacji HPI z Service
 Availability Forum. Jest budowany z bibliotekami OpenHPI, ale powinien
-daæ siê zbudowaæ z dowoln± implementacj± HPI 1.0. Dziêki temu
-podagentowi mo¿na dodaæ obs³ugê wielu ró¿nych rodzajów sprzêtu, w tym:
-IPMI, IBM Blade Center (poprzez SNMP), linuksowe urz±dzenia Watchdog,
+daÄ‡ siÄ™ zbudowaÄ‡ z dowolnÄ… implementacjÄ… HPI 1.0. DziÄ™ki temu
+podagentowi moÅ¼na dodaÄ‡ obsÅ‚ugÄ™ wielu rÃ³Å¼nych rodzajÃ³w sprzÄ™tu, w tym:
+IPMI, IBM Blade Center (poprzez SNMP), linuksowe urzÄ…dzenia Watchdog,
 systemy oparte na Sysfs.
 
 %prep
