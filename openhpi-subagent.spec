@@ -1,5 +1,5 @@
 Summary:	SNMP agent for modeling SAForum Hardware Platform Interface
-Summary(pl.UTF-8):   Agent SNMP do modelowania interfejsu HPI SAForum
+Summary(pl.UTF-8):	Agent SNMP do modelowania interfejsu HPI SAForum
 Name:		openhpi-subagent
 Version:	2.3.4
 Release:	1
