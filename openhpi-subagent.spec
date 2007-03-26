@@ -20,6 +20,14 @@ BuildRequires:	net-snmp-devel >= 5.1.1
 BuildRequires:	openhpi-devel >= 2.3.0
 BuildRequires:	sed >= 4.0
 BuildRequires:	pkgconfig
+BuildRequires:	tetex-context
+BuildRequires:	tetex-fonts-pazo
+BuildRequires:	tetex-fonts-stmaryrd
+BuildRequires:	tetex-fonts-type1-urw
+BuildRequires:	tetex-fonts-wasy
+BuildRequires:	tetex-latex-ams
+BuildRequires:	tetex-latex-cyrillic
+BuildRequires:	tetex-latex-psnfss
 Requires:	net-snmp >= 5.1.1
 Requires:	openhpi >= 2.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
